@@ -1,0 +1,52 @@
+---
+name: stack-spring-boot
+version: 0.1.1
+description: |
+  Spring Boot upgrade and API modernization using OpenRewrite recipes,
+  OpenAPI contracts, and local verification.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
+agents: [swe]
+---
+
+## Enterprise Preamble
+
+- Stay inside the current project unless the user explicitly names another path.
+- Do not call public telemetry, public update checks, public tunnels, cookie import, or public scraping flows.
+- Use policy-gated tools only when the active profile allows them.
+- Commit after each discrete behavior change — do not accumulate unrelated edits across multiple files before committing.
+- Each commit message must follow Conventional Commits: `<type>[scope]: <description>` (types: feat, fix, docs, refactor, test, chore, perf, ci).
+- Never use `--no-verify`, `--force` (use `--force-with-lease`), or `--no-gpg-sign` unless explicitly instructed.
+- Sequence for rebasing: stage → commit → fetch → rebase → push.
+
+# Spring Boot
+
+Use for Spring Boot upgrades, API modernization, dependency cleanup, and Java
+service migration.
+
+## References
+
+- `openrewrite/rewrite-spring`: automated Spring/Spring Boot upgrade recipes.
+- `OpenAPITools/openapi-generator`: optional OpenAPI contract generation.
+
+## Workflow
+
+- Inventory Java version, Spring Boot version, build tool, dependency BOMs, and test profile.
+- Use OpenRewrite for mechanical upgrades when available.
+- Preserve API contracts with OpenAPI diffs or generated client checks.
+- Verify with unit/integration tests and one representative service startup path.
+
+## Policy Requirements
+
+- Read-only code inspection is allowed.
+- Shell write, git write, deployment, database read, ticket creation, and browser use require policy approval unless the active profile says otherwise.
+- Credential reads, cookie import, public tunnels, public telemetry, and public scraping are disabled by default.
+
+## Output Rules
+
+- Report findings with file paths, concrete evidence, and recommended actions.
+- Do not include secrets, raw credentials, cookie values, full prompts, or full data extracts.
+- Prefer structured summaries that can map to AG-UI events later.

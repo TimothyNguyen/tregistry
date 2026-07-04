@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ag-tregistry"
+version = "0.1.0"
+description = "FastAPI and React agent registry scaffold with agent-architecture import support."
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.116.0,<1.0.0",
+    "uvicorn[standard]>=0.35.0,<1.0.0",
+    "sqlalchemy>=2.0.0,<3.0.0",
+    "pydantic>=2.11.0,<3.0.0",
+    "pydantic-settings>=2.10.0,<3.0.0",
+]
+
+[project.scripts]
+aa = "app.cli:main"
+
+[project.optional-dependencies]
+dev = [
+    "httpx2>=2.5.0,<3.0.0",
+    "mypy>=1.0.0,<2.0.0",
+    "pytest>=8.4.0,<9.0.0",
+    "pytest-cov>=6.2.0,<7.0.0",
+    "ruff>=0.9.0,<1.0.0",
+]
+
+[tool.setuptools]
+packages = ["app", "app.api", "app.api.routes", "app.core", "app.db", "app.schemas", "app.services", "imports", "imports.agent_architecture"]
+
+[tool.pytest.ini_options]
+addopts = "--cov=app --cov=imports --cov-report=term-missing"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+
+[tool.mypy]
+python_version = "3.11"
+ignore_missing_imports = true
+strict = false
+disallow_untyped_defs = true
+warn_return_any = true
+warn_unused_ignores = true
